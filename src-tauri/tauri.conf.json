@@ -7,7 +7,7 @@
   },
   "package": {
     "productName": "gameoflife",
-    "version": "0.0.0"
+    "version": "1.0.0"
   },
   "tauri": {
     "allowlist": {
@@ -54,11 +54,9 @@
     },
     "windows": [
       {
-        "fullscreen": false,
-        "height": 600,
+        "fullscreen": true,
         "resizable": true,
-        "title": "gameoflife",
-        "width": 800
+        "title": "Game Of Life"
       }
     ]
   }

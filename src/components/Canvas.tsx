@@ -42,7 +42,7 @@ const Canvas = () => {
 
         universe = await invoke("next_gen", { universe });
 
-        requestAnimationFrame(renderUniverse);
+        // requestAnimationFrame(renderUniverse);
       }
 
       await renderUniverse();

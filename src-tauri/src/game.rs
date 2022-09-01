@@ -36,18 +36,6 @@ impl Universe {
         }
     }
 
-    pub fn width(&self) -> u32 {
-        self.width
-    }
-
-    pub fn height(&self) -> u32 {
-        self.height
-    }
-
-    pub fn set_cells(&mut self) -> &Vec<Cell> {
-        &self.cells
-    }
-
     pub fn tick(&mut self) {
         let mut next = self.cells.clone();
 
