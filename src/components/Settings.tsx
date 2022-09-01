@@ -7,6 +7,7 @@ import {
   Slider,
   Typography,
 } from "@mui/material";
+import React from "react";
 import PlayIcon from "../assets/play.png";
 
 /**
@@ -14,10 +15,18 @@ import PlayIcon from "../assets/play.png";
  * 1. Width & height of the universe ☑️
  * 2. Probability of being a live ☑️
  * 3. Reproduction speed ☑️
- * 4. Colors
- * 5. Pause & continue
+ * 4. Colors ☑️
+ * 5. Pause & continue ☑️
  */
-const Settings = () => {
+
+type Props = {
+  width: number;
+  height: number;
+  setWidth(width: number): void;
+  setHeight(height: number): void;
+};
+
+const Settings: React.FC<Props> = ({ width, height, setWidth, setHeight }) => {
   return (
     <Grid
       container
@@ -31,27 +40,37 @@ const Settings = () => {
     >
       <Grid item xs={4}>
         <Box>
-          <Typography variant="h6">Width 📏</Typography>
+          <Typography variant="h6">Width ({width}) 📏</Typography>
           <Slider
-            aria-label="Temperature"
-            defaultValue={30}
             valueLabelDisplay="auto"
+            aria-label="Population width"
+            value={width}
+            onChange={(e) => {
+              if (!e || !e.target) return;
+              let event = e as any as React.ChangeEvent<HTMLInputElement>;
+              setWidth(Number(event.target.value));
+            }}
             step={10}
             marks
             min={10}
-            max={110}
+            max={100}
           />
         </Box>
         <Box>
-          <Typography variant="h6">Height 📏</Typography>
+          <Typography variant="h6">Height ({height}) 📏</Typography>
           <Slider
-            aria-label="Temperature"
-            defaultValue={30}
+            aria-label="Height"
+            value={height}
+            onChange={(e: Event) => {
+              if (!e || !e.target) return;
+              let event = e as any as React.ChangeEvent<HTMLInputElement>;
+              setHeight(Number(event.target.value));
+            }}
             valueLabelDisplay="auto"
             step={10}
             marks
             min={10}
-            max={110}
+            max={100}
           />
         </Box>
         <Box>

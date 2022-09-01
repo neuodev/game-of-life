@@ -9,17 +9,20 @@ type Universe = {
   cells: number[];
 };
 
-const Canvas = () => {
+type Props = {
+  width: number;
+  height: number;
+};
+
+const Canvas: React.FC<Props> = ({ width, height }) => {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     gameLoop();
-  }, [ref]);
+  }, [ref, width, height]);
 
   async function gameLoop() {
     if (!ref.current) return;
-    let height = 40;
-    let width = 40;
     try {
       let canvas = ref.current;
       let universe: Universe = await invoke("new_universe", {
