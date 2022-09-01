@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import { invoke } from "@tauri-apps/api";
 import React, { useEffect, useRef } from "react";
 import { CELL_SIZE, drawCells, drawGrid } from "../utils/canvas";
@@ -52,9 +53,17 @@ const Canvas = () => {
   }
 
   return (
-    <div>
+    <Box
+      sx={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <canvas ref={ref} />
-    </div>
+    </Box>
   );
 };
 

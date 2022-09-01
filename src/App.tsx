@@ -7,12 +7,16 @@ function App() {
   return (
     <Box
       sx={{
-        width: "100vh",
-        bgcolor: "green",
-        height: "100wh",
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
       }}
     >
-      <Canvas />
+      <Box sx={{ height: "100%", width: "100%" }}>
+        <Canvas />
+      </Box>
       <Settings />
     </Box>
   );
