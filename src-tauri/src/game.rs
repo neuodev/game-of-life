@@ -1,7 +1,9 @@
 use rand::{self, Rng};
 use serde::{Deserialize, Serialize};
+use serde_repr::*;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Serialize_repr, Deserialize_repr, PartialEq, Debug, Clone, Copy)]
+#[repr(u8)]
 pub enum Cell {
     Dead = 0,
     Alive = 1,
@@ -42,7 +44,7 @@ impl Universe {
         self.height
     }
 
-    pub fn cells(&self) -> &Vec<Cell> {
+    pub fn set_cells(&mut self) -> &Vec<Cell> {
         &self.cells
     }
 

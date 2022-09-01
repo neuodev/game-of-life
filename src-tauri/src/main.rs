@@ -12,9 +12,15 @@ fn new_universe(width: u32, height: u32) -> Universe {
     Universe::new(width, height)
 }
 
+#[tauri::command]
+fn next_gen(mut universe: Universe) -> Universe {
+    universe.tick();
+    universe
+}
+
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![new_universe])
+        .invoke_handler(tauri::generate_handler![new_universe, next_gen])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
