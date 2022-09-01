@@ -24,3 +24,30 @@ export const drawGrid = (
 
   ctx.stroke();
 };
+
+export const drawCells = (
+  ctx: CanvasRenderingContext2D,
+  width: number,
+  height: number,
+  cells: number[]
+) => {
+  ctx.beginPath();
+
+  for (let row = 0; row < height; row++) {
+    for (let col = 0; col < width; col++) {
+      const idx = row * width + col;
+
+      // This is updated!
+      ctx.fillStyle = cells[idx] ? ALIVE_COLOR : DEAD_COLOR;
+
+      ctx.fillRect(
+        col * (CELL_SIZE + 1) + 1,
+        row * (CELL_SIZE + 1) + 1,
+        CELL_SIZE,
+        CELL_SIZE
+      );
+    }
+  }
+
+  ctx.stroke();
+};
