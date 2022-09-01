@@ -17,12 +17,12 @@ pub struct Universe {
 }
 
 impl Universe {
-    pub fn new(width: u32, height: u32) -> Self {
+    pub fn new(width: u32, height: u32, probability: f64) -> Self {
         let mut gen = rand::thread_rng();
         let size = (width * height) as usize;
         let mut cells = Vec::new();
         for _ in 0..size {
-            cells.push(if gen.gen_bool(0.5) {
+            cells.push(if gen.gen_bool(probability) {
                 Cell::Alive
             } else {
                 Cell::Dead

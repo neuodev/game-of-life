@@ -11,15 +11,17 @@ type Universe = {
 
 type Props = {
   width: number;
+  probability: number;
   height: number;
+  cellSize: number;
 };
 
-const Canvas: React.FC<Props> = ({ width, height }) => {
+const Canvas: React.FC<Props> = ({ width, height, probability, cellSize }) => {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     gameLoop();
-  }, [ref, width, height]);
+  }, [ref, width, height, probability, cellSize]);
 
   async function gameLoop() {
     if (!ref.current) return;
@@ -28,11 +30,12 @@ const Canvas: React.FC<Props> = ({ width, height }) => {
       let universe: Universe = await invoke("new_universe", {
         height,
         width,
+        prop: probability,
       });
 
       async function renderUniverse() {
-        canvas.height = (CELL_SIZE + 1) * height + 1;
-        canvas.width = (CELL_SIZE + 1) * width + 1;
+        canvas.height = (cellSize + 1) * height + 1;
+        canvas.width = (cellSize + 1) * width + 1;
 
         let ctx = canvas.getContext("2d");
 
@@ -41,12 +44,23 @@ const Canvas: React.FC<Props> = ({ width, height }) => {
           return;
         }
 
-        drawGrid(ctx, height, width);
-        drawCells(ctx, width, height, universe.cells);
+        drawGrid({
+          ctx,
+          height,
+          width,
+          cellSize,
+        });
+        drawCells({
+          ctx,
+          width,
+          height,
+          cells: universe.cells,
+          cellSize,
+        });
 
         universe = await invoke("next_gen", { universe });
 
-        // requestAnimationFrame(renderUniverse);
+        requestAnimationFrame(renderUniverse);
       }
 
       await renderUniverse();

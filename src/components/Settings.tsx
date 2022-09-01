@@ -22,11 +22,24 @@ import PlayIcon from "../assets/play.png";
 type Props = {
   width: number;
   height: number;
+  probability: number;
+  cellSize: number;
   setWidth(width: number): void;
   setHeight(height: number): void;
+  setProba(prob: number): void;
+  setCellSize(prob: number): void;
 };
 
-const Settings: React.FC<Props> = ({ width, height, setWidth, setHeight }) => {
+const Settings: React.FC<Props> = ({
+  width,
+  height,
+  probability,
+  cellSize,
+  setWidth,
+  setHeight,
+  setProba,
+  setCellSize,
+}) => {
   return (
     <Grid
       container
@@ -53,7 +66,7 @@ const Settings: React.FC<Props> = ({ width, height, setWidth, setHeight }) => {
             step={10}
             marks
             min={10}
-            max={100}
+            max={200}
           />
         </Box>
         <Box>
@@ -70,14 +83,19 @@ const Settings: React.FC<Props> = ({ width, height, setWidth, setHeight }) => {
             step={10}
             marks
             min={10}
-            max={100}
+            max={200}
           />
         </Box>
         <Box>
           <Typography variant="h6">Probability of being alive 🧬</Typography>
           <Slider
-            defaultValue={0.5}
+            value={probability}
             valueLabelDisplay="auto"
+            onChange={(e: Event) => {
+              if (!e || !e.target) return;
+              let event = e as any as React.ChangeEvent<HTMLInputElement>;
+              setProba(Number(event.target.value));
+            }}
             step={0.01}
             min={0}
             max={1}
@@ -108,6 +126,21 @@ const Settings: React.FC<Props> = ({ width, height, setWidth, setHeight }) => {
             step={2}
             min={0}
             max={100}
+          />
+        </Box>
+        <Box>
+          <Typography variant="h6">Cell Size</Typography>
+          <Slider
+            value={cellSize}
+            onChange={(e: Event) => {
+              if (!e || !e.target) return;
+              let event = e as any as React.ChangeEvent<HTMLInputElement>;
+              setCellSize(Number(event.target.value));
+            }}
+            valueLabelDisplay="auto"
+            step={1}
+            min={0}
+            max={15}
           />
         </Box>
 

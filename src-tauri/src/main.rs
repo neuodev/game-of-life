@@ -8,8 +8,8 @@ use game::Universe;
 mod game;
 
 #[tauri::command]
-fn new_universe(width: u32, height: u32) -> Universe {
-    Universe::new(width, height)
+fn new_universe(width: u32, height: u32, prop: f64) -> Universe {
+    Universe::new(width, height, prop)
 }
 
 #[tauri::command]
