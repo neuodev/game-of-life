@@ -24,21 +24,27 @@ type Props = {
   height: number;
   probability: number;
   cellSize: number;
+  speed: number;
   setWidth(width: number): void;
   setHeight(height: number): void;
   setProba(prob: number): void;
   setCellSize(prob: number): void;
+  setSpeed(speed: number): void;
 };
 
+// Todo: Reduce code doplication
+// Fix on change handler
 const Settings: React.FC<Props> = ({
   width,
   height,
   probability,
   cellSize,
+  speed,
   setWidth,
   setHeight,
   setProba,
   setCellSize,
+  setSpeed,
 }) => {
   return (
     <Grid
@@ -121,15 +127,20 @@ const Settings: React.FC<Props> = ({
         <Box>
           <Typography variant="h6">Reproduction speed 🚅</Typography>
           <Slider
-            defaultValue={10}
+            value={speed}
+            onChange={(e: Event) => {
+              if (!e || !e.target) return;
+              let event = e as any as React.ChangeEvent<HTMLInputElement>;
+              setSpeed(Number(event.target.value));
+            }}
             valueLabelDisplay="auto"
-            step={2}
-            min={0}
-            max={100}
+            step={1}
+            min={1}
+            max={15}
           />
         </Box>
         <Box>
-          <Typography variant="h6">Cell Size</Typography>
+          <Typography variant="h6">Cell Size ☑️</Typography>
           <Slider
             value={cellSize}
             onChange={(e: Event) => {
@@ -138,7 +149,8 @@ const Settings: React.FC<Props> = ({
               setCellSize(Number(event.target.value));
             }}
             valueLabelDisplay="auto"
-            step={1}
+            marks
+            step={0.5}
             min={0}
             max={15}
           />
