@@ -1,7 +1,10 @@
-# Tauri + React + Typescript
+# Game Of Life 
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
+<p align="center">
 
-## Recommended IDE Setup
+<a href="https://youtu.be/C2vgICfQawE?t=72">
+  <img src="https://img.youtube.com/vi/C2vgICfQawE/0.jpg" alt="Game Of Life Video"/>
+</a>
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+</p>
+
